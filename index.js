@@ -14,9 +14,9 @@ import postRoutes from "./routes/post.js";
 import { register } from "./controllers/auth.js";
 import { createPost } from "./controllers/post.js";
 import { verifyToken } from "./middleware/auth.js";
-import User from "./models/User.js";
-import Post from "./models/Post.js";
-import { users, posts } from "./data/index.js";
+// import User from "./models/User.js";
+// import Post from "./models/Post.js";
+// import { users, posts } from "./data/index.js";
 
 // Configurations
 // Middlewares
@@ -54,7 +54,7 @@ app.use("/user", userRoutes);
 app.use("/post", postRoutes);
 
 // Mongoose setup
-const PORT = process.env.PORT || 6001;
+const PORT = process.env.PORT || 8080;
 mongoose.set("strictQuery", false);
 mongoose
   .connect(process.env.MONGO_URL, {
@@ -62,7 +62,9 @@ mongoose
     useUnifiedTopology: true,
   })
   .then(() => {
-    app.listen(PORT, () => console.log(`Server Port: ${PORT}`));
+    app.listen(PORT, () =>
+      console.log(`Server ready at http://localhost:${PORT}`)
+    );
 
     // Add data one time
     // User.insertMany(users);
